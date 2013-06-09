@@ -9,21 +9,34 @@
 #import "TipCalcViewController.h"
 
 @interface TipCalcViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *showCalValue;
+- (IBAction)calculateTip:(UIButton *)sender;
+
 
 @end
 
 @implementation TipCalcViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+- (IBAction)calculateTip:(UIButton *)sender {
+    int tip = 15;
+    self.amount = self.showCalValue.text;
+    NSLog(@"Button pressed: %@", [sender currentTitle]);
+    if ([sender.currentTitle isEqualToString:@"20%"]) {
+        tip = 20;
+    } else if ([sender.currentTitle isEqualToString:@"15%"]) {
+        tip = 15;
+    }
+    double amount = (self.amount.doubleValue * tip ) / 100;
+    NSString *message = [[NSString alloc] initWithFormat:@"%g", amount];
+    self.showCalValue.text = message;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if (theTextField == self.showCalValue) {
+        [theTextField resignFirstResponder];
+    }
+    return YES;
 }
 
 @end

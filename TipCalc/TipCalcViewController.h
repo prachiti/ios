@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TipCalcViewController : UIViewController
+@interface TipCalcViewController : UIViewController <UITextFieldDelegate>
+
+@property (copy, nonatomic) NSString *amount;
+
 
 @end
